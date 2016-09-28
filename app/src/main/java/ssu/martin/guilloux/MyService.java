@@ -20,9 +20,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 
-/**
- * Created by root on 27/09/16.
- */
+
 public class MyService extends Service {
 
     private LocationManager mlocManager;

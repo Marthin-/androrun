@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 stopService(new Intent(MainActivity.this, MyService.class));
                 Toast.makeText(MainActivity.this, "Stopped activity", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
 
