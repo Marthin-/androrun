@@ -66,7 +66,7 @@ public class MyService extends Service {
 
         //set listener
 
-        this.mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 6000, 10, fonzie = new LocationListener() {
+        this.mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 6000, 0, fonzie = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
                 String FILENAME = "loc.txt";
