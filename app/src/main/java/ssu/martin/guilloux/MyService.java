@@ -47,7 +47,7 @@ public class MyService extends Service {
 
         //get location at start
 
-        Location location = mlocManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        Location location = this.mlocManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         String FILENAME = "loc.txt";
         FileOutputStream fos = null;
         try {
@@ -55,7 +55,7 @@ public class MyService extends Service {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        String string=new String(location.getLatitude()+":"+location.getLongitude());
+        String string=new String(location.getLatitude()+","+location.getLongitude()+"\n");
         try {
             fos.write(string.getBytes());
             Toast.makeText(MyService.this, "new location "+ string, Toast.LENGTH_SHORT).show();
@@ -66,7 +66,7 @@ public class MyService extends Service {
 
         //set listener
 
-        this.mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 6000, 0, fonzie = new LocationListener() {
+        this.mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 6000, 10, fonzie = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
                 String FILENAME = "loc.txt";

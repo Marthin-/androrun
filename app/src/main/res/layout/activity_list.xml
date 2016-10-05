@@ -7,7 +7,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="ssu.martin.guilloux.ListActivity">
+    tools:context="ssu.martin.guilloux.ListActivity"
+    android:background="@drawable/notification_template_icon_bg">
 
     <TextView
         android:layout_width="wrap_content"

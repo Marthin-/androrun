@@ -32,9 +32,22 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 stopService(new Intent(MainActivity.this, MyService.class));
                 Toast.makeText(MainActivity.this, "Stopped activity", Toast.LENGTH_SHORT).show();
-                finish();
+                //finish();
             }
         });
+
+
+        Button list=(Button) findViewById(R.id.view);
+        list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent voirListe = new Intent(getApplicationContext(),ListActivity.class);
+                startActivity(voirListe);
+                Toast.makeText(MainActivity.this, "Stopped activity", Toast.LENGTH_SHORT).show();
+                //finish();
+            }
+        });
+
 
         Button b2 = (Button) findViewById(R.id.b2);
         b2.setOnClickListener(new View.OnClickListener() {

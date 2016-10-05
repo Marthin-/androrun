@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:text="supprimer log"
         android:id="@+id/b2"
-        android:layout_below="@+id/stahp"
+        android:layout_below="@+id/view"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -38,8 +38,17 @@
         android:layout_height="wrap_content"
         android:text="stahp"
         android:id="@+id/stahp"
-        android:layout_below="@+id/b1"
+        android:layout_below="@+id/b2"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View list"
+        android:id="@+id/view"
+        android:layout_below="@+id/b1"
+        android:layout_alignRight="@+id/b1"
+        android:layout_alignEnd="@+id/b1" />
 
 </RelativeLayout>
