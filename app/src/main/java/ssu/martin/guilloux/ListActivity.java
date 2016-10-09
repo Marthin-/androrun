@@ -1,9 +1,14 @@
 package ssu.martin.guilloux;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -22,56 +27,43 @@ public class ListActivity extends AppCompatActivity {
         try {
             // open the file for reading
             InputStream instream = openFileInput("loc.txt");
-
-            // if file the available for reading
-            //     if (instream) {
-            // prepare the file for reading
             InputStreamReader inputreader = new InputStreamReader(instream);
             BufferedReader buffreader = new BufferedReader(inputreader);
 
-            String line = buffreader.readLine();
-            Toast.makeText(ListActivity.this, line, Toast.LENGTH_SHORT).show();
+            String line;
+            //feed list with positions
+
+            final ListView list = (ListView)findViewById(R.id.listView);
+            ArrayAdapter<String> tableau = new ArrayAdapter<>(list.getContext(),R.layout.liste);
+            while((line=buffreader.readLine())!=null) {
+                tableau.add(line);
+            }
+            list.setAdapter(tableau);
+
+            //make list item clickable so that it launches ggmaps at selected position
+            list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Toast.makeText(ListActivity.this, "List item was clicked at " + id, Toast.LENGTH_SHORT).show();
+                    int monId = view.getId();
+                    //Toast.makeText(ListActivity.this, "id clicked " + monId, Toast.LENGTH_SHORT).show();
+                    TextView tv1=(TextView) findViewById(monId);
+                    String ltlg = tv1.getText().toString();
+                    //Toast.makeText(ListActivity.this, "clicked on location " + ltlg, Toast.LENGTH_SHORT).show();
+                    String [] tab = ltlg.split(",");
+                    Toast.makeText(ListActivity.this, "lat : "+tab[0]+",lon : "+tab[1], Toast.LENGTH_SHORT).show();
+
+                    //creating uri for ggmaps
+                    String mapsUri=new String("http://maps.google.com/maps?addr="+tab[0]+","+tab[1]);
+
+                    //sending it with an intent
+                    Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(mapsUri));
+                    startActivity(intent);
 
 
-
-
-
-
-
-
-
-
-
-    /*    ListView list = (ListView)findViewById(R.id.listView);
-        ArrayAdapter<String> tableau = new ArrayAdapter<>(list.getContext(),R.layout.activity_list);
-
-        // try opening the myfilename.txt
-        try {
-            // open the file for reading
-            InputStream instream = openFileInput("loc.txt");
-
-            // if file the available for reading
-       //     if (instream) {
-                // prepare the file for reading
-                InputStreamReader inputreader = new InputStreamReader(instream);
-                BufferedReader buffreader = new BufferedReader(inputreader);
-
-                String line;
-                // read every line of the file into the line-variable, on line at the time
-                while ((line=buffreader.readLine())!=null) {
-                    tableau.add(line);
                 }
-                instream.close();
-        //    }
-        } catch (java.io.FileNotFoundException e) {
-            Toast.makeText(ListActivity.this, "Could not read loc.txt !", Toast.LENGTH_LONG).show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            Toast.makeText(ListActivity.this, "oui donc ça fonctionne pas.", Toast.LENGTH_SHORT).show();
-        }
+            });
 
-        list.setAdapter(tableau);
-*/
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

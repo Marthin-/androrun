@@ -13,8 +13,6 @@ import android.widget.Toast;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 
 import android.location.Location;
 import android.location.LocationListener;
@@ -38,46 +36,33 @@ public class MyService extends Service {
     }
 
     public int onStartCommand(Intent intent, int flags, int startId) {
-    //    Toast.makeText(MyService.this, "started service", Toast.LENGTH_SHORT).show();
+        Bundle extras = intent.getExtras();
+        int tv = extras.getInt("timeValue")*1000;
         this.mlocManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             Toast.makeText(MyService.this, "GPS unauthorized...", Toast.LENGTH_SHORT).show();
             return -1;
         }
 
-        //get location at start
+        //set listener sans penser aux conséquences
 
-        Location location = this.mlocManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        String FILENAME = "loc.txt";
-        FileOutputStream fos = null;
-        try {
-            fos = openFileOutput(FILENAME, Context.MODE_APPEND);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        String string=new String(location.getLatitude()+","+location.getLongitude()+"\n");
-        try {
-            fos.write(string.getBytes());
-            Toast.makeText(MyService.this, "new location "+ string, Toast.LENGTH_SHORT).show();
-        } catch (IOException e) {
-            Toast.makeText(MyService.this, "could not write !", Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-        }
-
-        //set listener
-
-        this.mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 6000, 10, fonzie = new LocationListener() {
+        this.mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, tv, 00, fonzie = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
                 String FILENAME = "loc.txt";
                 FileOutputStream fos = null;
                 try {
+                    //open it like you mean it !
                     fos = openFileOutput(FILENAME, Context.MODE_APPEND);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
-                String string=new String(location.getLatitude()+":"+location.getLongitude());
+                String string=new String(location.getLatitude()+","+location.getLongitude()+"\n");
                 try {
+                    /*Pourquoi les mammouths ont disparu ?
+                     *...
+                     *Parce qu'il n'y avait plus de pappouths
+                     */
                     fos.write(string.getBytes());
                     Toast.makeText(MyService.this, "new location "+ string, Toast.LENGTH_SHORT).show();
                 } catch (IOException e) {
