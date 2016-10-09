@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Lancez le service de localisation en apuyant sur Start."
+        android:text="Bienvenue. Choisissez une fréquence de rafraîchissement, puis lancez le service GPS en appuyant sur Start. Vous pouvez fermer cette application avec Stahp, lister vos positions ou vider votre historique. En cliquant sur une position vous serez redirigé sur Google Maps."
         android:id="@+id/txt" />
 
     <Button
@@ -20,35 +20,51 @@
         android:layout_height="wrap_content"
         android:text="start"
         android:id="@+id/b1"
-        android:layout_below="@+id/txt"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_below="@+id/numberPicker"
+        android:layout_centerHorizontal="true" />
 
-    <Button
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/linearLayout">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="View list"
+            android:id="@+id/view"
+            android:layout_above="@+id/b2"
+            android:layout_alignRight="@+id/b1"
+            android:layout_alignEnd="@+id/b1" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="supprimer log"
+            android:id="@+id/b2"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="stahp"
+            android:id="@+id/stahp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+    </LinearLayout>
+
+    <NumberPicker
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="supprimer log"
-        android:id="@+id/b2"
-        android:layout_below="@+id/view"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="stahp"
-        android:id="@+id/stahp"
-        android:layout_below="@+id/b2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="View list"
-        android:id="@+id/view"
-        android:layout_below="@+id/b1"
-        android:layout_alignRight="@+id/b1"
-        android:layout_alignEnd="@+id/b1" />
+        android:id="@+id/numberPicker"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
